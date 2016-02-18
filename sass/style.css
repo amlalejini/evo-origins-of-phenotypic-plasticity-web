@@ -1,0 +1,105 @@
+.state_block, .env_canvas .nandpnotm, .env_canvas .nandmnotp, .data_canvas .C0000, .data_canvas .C0001, .data_canvas .C0010, .data_canvas .C0011, .data_canvas .C0100, .data_canvas .C0101, .data_canvas .C0110, .data_canvas .C0111, .data_canvas .C1000, .data_canvas .C1001, .data_canvas .C1010, .data_canvas .C1011, .data_canvas .C1100, .data_canvas .C1101, .data_canvas .C1110, .data_canvas .C1111 {
+  stroke: black; }
+
+#legend tr .C0000 {
+  background-color: #4d4d4d; }
+#legend tr .C0001 {
+  background-color: #ff4d4d; }
+#legend tr .C0010 {
+  background-color: #009a00; }
+#legend tr .C0011 {
+  background-color: #cdcdcd; }
+#legend tr .C0100 {
+  background-color: #009a00; }
+#legend tr .C0101 {
+  background-color: #00cccc; }
+#legend tr .C0110 {
+  background-color: #009a00; }
+#legend tr .C0111 {
+  background-color: #009a00; }
+#legend tr .C1000 {
+  background-color: #990000; }
+#legend tr .C1001 {
+  background-color: #ffdb1a; }
+#legend tr .C1010 {
+  background-color: #3333ff; }
+#legend tr .C1011 {
+  background-color: #b300b3; }
+#legend tr .C1100 {
+  background-color: #cdcdcd; }
+#legend tr .C1101 {
+  background-color: #ff9dab; }
+#legend tr .C1110 {
+  background-color: #009a00; }
+#legend tr .C1111 {
+  background-color: white; }
+
+.lineage_filter_options {
+  float: none;
+  margin: 0 auto; }
+
+.nandpnotm_points {
+  fill: red;
+  fill-opacity: 0.2; }
+
+.nandmnotp_points {
+  fill: blue;
+  fill-opacity: 0.2; }
+
+.axis path, .x_axis path, .y_axis path {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges; }
+.axis text, .x_axis text, .y_axis text {
+  font-family: sans-serif;
+  font-size: 11px; }
+
+.env_canvas .nandpnotm {
+  fill: #4d4dff; }
+.env_canvas .nandmnotp {
+  fill: #00e6e6; }
+
+.data_canvas .line, .data_canvas .nandpnotm_line, .data_canvas .nandmnotp_line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges; }
+.data_canvas .nandpnotm_line {
+  stroke: red;
+  opacity: 0.5; }
+.data_canvas .nandmnotp_line {
+  stroke: blue;
+  opacity: 0.5; }
+.data_canvas .C0000 {
+  fill: #4d4d4d; }
+.data_canvas .C0001 {
+  fill: #ff4d4d; }
+.data_canvas .C0010 {
+  fill: #009a00; }
+.data_canvas .C0011 {
+  fill: #cdcdcd; }
+.data_canvas .C0100 {
+  fill: #009a00; }
+.data_canvas .C0101 {
+  fill: #00cccc; }
+.data_canvas .C0110 {
+  fill: #009a00; }
+.data_canvas .C0111 {
+  fill: #009a00; }
+.data_canvas .C1000 {
+  fill: #990000; }
+.data_canvas .C1001 {
+  fill: #ffdb1a; }
+.data_canvas .C1010 {
+  fill: #3333ff; }
+.data_canvas .C1011 {
+  fill: #b300b3; }
+.data_canvas .C1100 {
+  fill: #cdcdcd; }
+.data_canvas .C1101 {
+  fill: #ff9dab; }
+.data_canvas .C1110 {
+  fill: #009a00; }
+.data_canvas .C1111 {
+  fill: white; }
+
+/*# sourceMappingURL=style.css.map */
