@@ -4,40 +4,79 @@
 
 var treatment_name = default_treatment;
 var settings = lineage_vis_settings;
+var data_fpath = lineage_vis_data_fpath;        // Data path for lineage sequence data
 
+/// : all treatment specific stuff needs to get moved to update step!
 // Load relevant things from settings
-var hr_name = settings[treatment_name]["hr_name"];                        // Human readable name for treatment
-var data_fpath = "data/" + settings[treatment_name]["data_file"];         // Data path for lineage sequence data
-var display_ranges = settings[treatment_name]["show_ranges"];             // Lineage time-slices
-var max_update = settings[treatment_name]["maximum_update"];              // Max update for treatment
-var cycle_length = settings[treatment_name]["environment_cycle_length"];  // Environment cycle length for treatment
-var environment_codes = settings[treatment_name]["environment_codes"];         // Environment codes (in order)
-var update_label_interval = settings[treatment_name]["update_label_interval"];
-var max_reps = settings[treatment_name]["max_reps"];
+var hr_name               = null;        // Human readable name for treatment
+var display_ranges        = null;        // Lineage time-slices
+var max_update            = null;        // Max update for treatment
+var cycle_length          = null;        // Environment cycle length for treatment
+var environment_codes     = null;        // Environment codes (in order)
+var update_label_interval = null;
+var max_reps              = null;
+var total_range           = null;
+var environment_sequence = null;
 
-// calculate total display range magnitude
-var total_range = 0
-for (var i = 0; i < display_ranges.length; i++) {
-  total_range += display_ranges[i][1] - display_ranges[i][0];
-}
-
-// Build environment data: (what did the environment look like?)
-var environment_sequence = [];
-var prev_environment = -1;
-for (var i = 0; i < max_update; i += cycle_length) {
-  var start_update = i;
-  var duration = cycle_length;
-  // clip duration to not go above max_update
-  if (duration > max_update) {
-    duration = max_update - start_update;
+var update_parameters = function() {
+  // This is gross for now
+  hr_name = settings[treatment_name]["hr_name"];                        // Human readable name for treatment
+  display_ranges = settings[treatment_name]["show_ranges"];             // Lineage time-slices
+  max_update = settings[treatment_name]["maximum_update"];              // Max update for treatment
+  cycle_length = settings[treatment_name]["environment_cycle_length"];  // Environment cycle length for treatment
+  environment_codes = settings[treatment_name]["environment_codes"];         // Environment codes (in order)
+  update_label_interval = settings[treatment_name]["update_label_interval"];
+  max_reps = settings[treatment_name]["max_reps"];
+  // calculate total display range magnitude
+  total_range = 0
+  for (var i = 0; i < display_ranges.length; i++) {
+    total_range += display_ranges[i][1] - display_ranges[i][0];
   }
-  // Get current environment
-  var cur_environment = (prev_environment + 1) % environment_codes.length;
-  // Add environment to sequence
-  environment_sequence.push({"environment": environment_codes[cur_environment], "start": start_update, "duration": duration});
-  // Update previous environment
-  prev_environment = cur_environment;
+
 }
+
+var build_environment = function() {
+  // Build environment data: (what did the environment look like?)
+  environment_sequence = [];  // empty out environment sequence
+  var prev_environment = -1;
+  for (var i = 0; i < max_update; i += cycle_length) {
+    var start_update = i;
+    var duration = cycle_length;
+    // clip duration to not go above max_update
+    if (duration > max_update) {
+      duration = max_update - start_update;
+    }
+    // Get current environment
+    var cur_environment = (prev_environment + 1) % environment_codes.length;
+    // Add environment to sequence
+    environment_sequence.push({"environment": environment_codes[cur_environment], "start": start_update, "duration": duration});
+    // Update previous environment
+    prev_environment = cur_environment;
+  }
+}
+
+
+
+update_parameters();
+build_environment();
+
+// Setup canvas
+var chart_area = d3.select("#chart_area");
+var frame = chart_area.append("svg");
+var canvas = frame.append("g");
+
+var margin = {top: 20, right: 20, bottom: 300, left: 100};
+var frame_width = 1000;
+var frame_height = total_range * (0.1) ;
+var canvas_width = frame_width - margin.left - margin.right;
+var canvas_height = frame_height - margin.top - margin.bottom;
+
+frame.attr({"width": frame_width, "height": frame_height});
+canvas.attr({"transform": "translate(" + margin.left + "," + margin.top + ")"});
+
+console.log("Bookmark");
+
+
 
 // Data Loading Function
 var data_accessor = function(row) {
@@ -49,6 +88,7 @@ var data_accessor = function(row) {
     state_sequence.push({state: states[i], duration: state_durations[i], start: state_entries[i]});
   }
   return {
+    treatment: row.treatment,
     rep_id: row.id,
     final_plastic: row.final_plastic,
     state_sequence: state_sequence
@@ -85,7 +125,7 @@ var slice_data = function(data) {
   //  slices state sequence data based on predefined ranges
   var sliced_data = [];
   for (var i = 0; i < data.length; i++) {
-    var sliced_lineage = {rep_id: data[i].rep_id, final_plastic: data[i].final_plastic, state_sequence: []};
+    var sliced_lineage = {treatment: data[i].treatment, rep_id: data[i].rep_id, final_plastic: data[i].final_plastic, state_sequence: []};
     // for each piece of data (lineage), make new sliced lineage
     for (var si = 0; si < data[i].state_sequence.length; si++) {
       // for each state in lineage, check to see if we're keeping it; if so, add to sliced lineage
@@ -129,19 +169,7 @@ var get_range_id = function(state_sequence_obj) {
 var x_domain = [0, max_reps * 1.5 + 3]    // Range of values x can take on
 var y_domain = [0, max_update]            // Range of values y can take on
 
-// Setup canvas
-var chart_area = d3.select("#chart_area");
-var frame = chart_area.append("svg");
-var canvas = frame.append("g");
 
-var margin = {top: 20, right: 20, bottom: 300, left: 100};
-var frame_width = 1000;
-var frame_height = total_range * (0.1) ;
-var canvas_width = frame_width - margin.left - margin.right;
-var canvas_height = frame_height - margin.top - margin.bottom;
-
-frame.attr({"width": frame_width, "height": frame_height});
-canvas.attr({"transform": "translate(" + margin.left + "," + margin.top + ")"});
 
 // SETUP X AXIS
 var xScale = d3.scale.linear();
@@ -183,10 +211,18 @@ var env_blocks = env_canvas.selectAll("rect").data(environment_sequence)
                                             });
 
 var data_callback = function(data) {
+  // Set treatment selector text to current treatment name
+  $("#treatment_selector").html(settings[treatment_name]["hr_name"] + "<span class='caret'></span>");
+  // Update parameters based on current treatment name
+  update_parameters();
+
   // Build data canvas
   var data_canvas = canvas.append("g").attr({"class": "data_canvas"});
+  // Grab initial type of data to display (plastic, nonplastic, or all)
   var display = $('input[name="display"]:checked').val();
-  var display_data = data.filter(function(d) {
+  // Filter data by display and treatment
+  var display_data = data.filter(function(d) { return d.treatment == treatment_name; } )
+                         .filter(function(d) {
                                     if (display == "plastic") {
                                       return d.final_plastic == "True";
                                     } else if (display == "nonplastic") {
@@ -195,6 +231,7 @@ var data_callback = function(data) {
                                       return d;
                                     }
                                   });
+  // Slice data to dispaly ranges
   display_data = slice_data(display_data);
 
   var update = function() {
@@ -220,12 +257,14 @@ var data_callback = function(data) {
     });
   }
 
+
   update();
 
   $(document).ready(function () {
     $("input[type='radio']").on("change", function(){
         display = $('input[name="display"]:checked').val();
-        display_data = data.filter(function(d) {
+        display_data = data.filter(function(d) { return d.treatment == treatment_name; })
+                           .filter(function(d) {
                                           if (display == "plastic") {
                                             return d.final_plastic == "True";
                                           } else if (display == "nonplastic") {
@@ -238,17 +277,29 @@ var data_callback = function(data) {
         update();
     });
   });
+
+  $(".dropdown-menu li a").click(function(){
+    // update treatment name
+    treatment_name = $(this).attr("value");
+    // update paramters
+    update_parameters();
+    // update displayed treatment name in treatment selector
+    $(this).parents(".dropdown").find('.btn').html(settings[treatment_name]["hr_name"] + ' <span class="caret"></span>');
+    $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+    display_data = data.filter(function(d) { return d.treatment == treatment_name; })
+                       .filter(function(d) {
+                                      if (display == "plastic") {
+                                        return d.final_plastic == "True";
+                                      } else if (display == "nonplastic") {
+                                        return d.final_plastic == "False";
+                                      } else if (display == "all") {
+                                        return d;
+                                      }
+                                    });
+    display_data = slice_data(display_data);
+    update();
+  });
 }
 
 // Load data from csv
 d3.csv(data_fpath, data_accessor, data_callback);
-
-
-
-$("#treatment_selector").html(settings[treatment_name]["hr_name"] + "<span class='caret'></span>");
-$(".dropdown-menu li a").click(function(){
-  treatment_name = $(this).attr("value");
-  $(this).parents(".dropdown").find('.btn').html(settings[treatment_name]["hr_name"] + ' <span class="caret"></span>');
-  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-  data_fpath = "data/" + settings[treatment_name]["data_file"];         // Data path for lineage sequence data
-});

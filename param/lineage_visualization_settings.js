@@ -1,9 +1,9 @@
-var default_treatment = "baseline";
+var default_treatment = "io-sense-only";
+var lineage_vis_data_fpath = "data/lineage_states.csv";
 var lineage_vis_settings =
 {
-  "control": {
+  "io-sense-control": {
     "hr_name": "Control",
-    "data_file": "io-sense-control-treatment_lineages_states.csv",
     "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
     "environment_cycle_length": 100000,
     "maximum_update": 100000,
@@ -11,9 +11,8 @@ var lineage_vis_settings =
     "update_label_interval": 500,
     "max_reps": 50
   },
-  "short_environment_cycle": {
-    "hr_name": "Short Environment Cycle Length Treatment",
-    "data_file": "io-sense-cycle-50-treatment_lineages_states.csv",
+  "io-sense-cycle-50": {
+    "hr_name": "Short Environment Cycle Length",
     "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
     "environment_cycle_length": 50,
     "maximum_update": 100000,
@@ -22,9 +21,8 @@ var lineage_vis_settings =
     "max_reps": 50
 
   },
-  "long_environment_cycle": {
+  "io-sense-cycle-200": {
     "hr_name": "Long Environment Cycle Length Treatment",
-    "data_file": "io-sense-cycle-200-treatment_lineages_states.csv",
     "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
     "environment_cycle_length": 200,
     "maximum_update": 100000,
@@ -32,9 +30,8 @@ var lineage_vis_settings =
     "update_label_interval": 500,
     "max_reps": 50
   },
-  "low_mut": {
+  "io-sense-mut": {
     "hr_name": "Low Mutation Rate Treatment",
-    "data_file": "io-sense-mut-treatment_lineages_states.csv",
     "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
     "environment_cycle_length": 100,
     "maximum_update": 100000,
@@ -42,9 +39,8 @@ var lineage_vis_settings =
     "update_label_interval": 500,
     "max_reps": 50
   },
-  "high_mut": {
+  "io-sense-mut-high": {
     "hr_name": "High Mutation Rate Treatment",
-    "data_file": "io-sense-mut-high-treatment_lineages_states.csv",
     "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
     "environment_cycle_length": 100,
     "maximum_update": 100000,
@@ -52,9 +48,8 @@ var lineage_vis_settings =
     "update_label_interval": 500,
     "max_reps": 50
   },
-  "baseline": {
+  "io-sense-only": {
     "hr_name": "Baseline Treatment",
-    "data_file": "io-sense-only-treatment_lineages_states.csv",
     "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
     "environment_cycle_length": 100,
     "maximum_update": 100000,
