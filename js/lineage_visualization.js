@@ -2,12 +2,10 @@
 // js used to generate figure for alife 2016 paper (evo stepping stones for plasticity)
 /////////////////////////////////////////////////////////
 
+// Load relevant things from settings
 var treatment_name = default_treatment;
 var settings = lineage_vis_settings;
 var data_fpath = lineage_vis_data_fpath;        // Data path for lineage sequence data
-
-/// : all treatment specific stuff needs to get moved to update step!
-// Load relevant things from settings
 var hr_name               = null;        // Human readable name for treatment
 var display_ranges        = null;        // Lineage time-slices
 var max_update            = null;        // Max update for treatment
@@ -16,10 +14,23 @@ var environment_codes     = null;        // Environment codes (in order)
 var update_label_interval = null;
 var max_reps              = null;
 var total_range           = null;
-var environment_sequence = null;
+var environment_sequence  = null;
+var zoom_mult             = 0.20;
+// canvas parameters; TODO: move all of these values to param js file
+var margin = {top: 20, right: 20, bottom: 300, left: 100};
+var frame_width = 1000;
+var frame_height = 1500;
+var canvas_width = frame_width - margin.left - margin.right;
+var canvas_height = frame_height - margin.top - margin.bottom;
+// Some constants:
+var x_domain = null;    // Range of values x can take on
+var y_domain = null;            // Range of values y can take on
+var spacer_length = 20;
 
 var update_parameters = function() {
-  // This is gross for now
+  ////////////////////////////
+  // UPDATE GLOBAL PARAMETERS
+  ////////////////////////////
   hr_name = settings[treatment_name]["hr_name"];                        // Human readable name for treatment
   display_ranges = settings[treatment_name]["show_ranges"];             // Lineage time-slices
   max_update = settings[treatment_name]["maximum_update"];              // Max update for treatment
@@ -32,10 +43,9 @@ var update_parameters = function() {
   for (var i = 0; i < display_ranges.length; i++) {
     total_range += display_ranges[i][1] - display_ranges[i][0];
   }
-
-}
-
-var build_environment = function() {
+  ////////////////////////////
+  // Build environment sequence
+  ////////////////////////////
   // Build environment data: (what did the environment look like?)
   environment_sequence = [];  // empty out environment sequence
   var prev_environment = -1;
@@ -53,30 +63,19 @@ var build_environment = function() {
     // Update previous environment
     prev_environment = cur_environment;
   }
+  ////////////////////////////
+  // Update frame/canvas parameters
+  ////////////////////////////
+  frame_width = 1000; // at some point, this may actually be a variable parameters, but that day is not today
+  frame_height = total_range * zoom_mult;
+  canvas_width = frame_width - margin.left - margin.right;
+  canvas_height = frame_height - margin.top - margin.bottom;
+  ////////////////////////////
+  // update axis parameters
+  ////////////////////////////
+  x_domain = [0, max_reps * 1.5 + 3];    // Range of values x can take on
+  y_domain = [0, max_update];            // Range of values y can take on
 }
-
-
-
-update_parameters();
-build_environment();
-
-// Setup canvas
-var chart_area = d3.select("#chart_area");
-var frame = chart_area.append("svg");
-var canvas = frame.append("g");
-
-var margin = {top: 20, right: 20, bottom: 300, left: 100};
-var frame_width = 1000;
-var frame_height = total_range * (0.1) ;
-var canvas_width = frame_width - margin.left - margin.right;
-var canvas_height = frame_height - margin.top - margin.bottom;
-
-frame.attr({"width": frame_width, "height": frame_height});
-canvas.attr({"transform": "translate(" + margin.left + "," + margin.top + ")"});
-
-console.log("Bookmark");
-
-
 
 // Data Loading Function
 var data_accessor = function(row) {
@@ -165,57 +164,51 @@ var get_range_id = function(state_sequence_obj) {
   return -1;
 }
 
-// Some constants:
-var x_domain = [0, max_reps * 1.5 + 3]    // Range of values x can take on
-var y_domain = [0, max_update]            // Range of values y can take on
 
-
-
-// SETUP X AXIS
-var xScale = d3.scale.linear();
-xScale.domain(x_domain).range([0, canvas_width]);
-var xAxis = d3.svg.axis().scale(xScale).tickValues([]).orient("top");
-canvas.append("g").attr({"class": "x_axis"}).call(xAxis);
-canvas.append("text").attr({"class": "axis_label", "x":xScale(20), "y": -10})
-                    .style("text-anchor", "middle")
-                    .text("")
-
-// SETUP Y AXIS
-var yScales = [];
-var prev_range_end = 0;
-var spacer_length = 20;
-for (var i = 0; i < display_ranges.length; i++) {
-  var current_range_end = prev_range_end + ( ( (display_ranges[i][1] - display_ranges[i][0]) / total_range) * (canvas_height - (spacer_length * (display_ranges.length - 1))))
-  var yScale = d3.scale.linear();
-  yScale.domain(display_ranges[i]).range([prev_range_end, current_range_end]);
-  yScales.push(yScale);
-  prev_range_end = current_range_end + spacer_length;
-  var tick_num = (display_ranges[i][1] - display_ranges[i][0]) / update_label_interval;
-  var yAxis = d3.svg.axis().scale(yScale).ticks(tick_num).orient("left");
-  canvas.append("g").attr({"class": "y_axis", "id": "y_axis-" + i}).call(yAxis);
-}
-canvas.append("text").attr({"class": "axis_label", "x": 0 - (canvas_height/2), "y": 0 - (margin.left / 1.5), "transform": "rotate(-90)"})
-                      .style("text-anchor", "middle")
-                      .text("Update")
-
-// Draw environment indicator
-var env_canvas = canvas.append("g").attr({"class": "env_canvas"});
-// slice environment sequence
-environment_sequence = slice_env_sequence(environment_sequence);
-var env_blocks = env_canvas.selectAll("rect").data(environment_sequence)
-                  .enter().append("rect").attr({"y": function(d) { var si = get_range_id(d); return yScales[si](d.start); },
-                                                "x": function(d) { return xScale(0); },
-                                                "width": function(d) { return 5; },
-                                                "height": function(d) { var si = get_range_id(d); return yScales[si](display_ranges[si][0] + d.duration) - yScales[si](display_ranges[si][0]); },
-                                                "class": function(d) { return d.environment; },
-                                            });
 
 var data_callback = function(data) {
+  ////////////////////////////////////////////////////////////////////
+  // Update 'dem parameters
+  ////////////////////////////////////////////////////////////////////
   // Set treatment selector text to current treatment name
   $("#treatment_selector").html(settings[treatment_name]["hr_name"] + "<span class='caret'></span>");
   // Update parameters based on current treatment name
   update_parameters();
 
+  ////////////////////////////////////////////////////////////////////
+  // setup canvas
+  ///////////////////////////////////////////////////////////////////
+  var chart_area = d3.select("#chart_area");
+  var frame = chart_area.append("svg");
+  var canvas = frame.append("g");
+
+  frame.attr({"width": frame_width, "height": frame_height});
+  canvas.attr({"transform": "translate(" + margin.left + "," + margin.top + ")"});
+
+  ////////////////////////////////////////////////////////////////////
+  // setup axes
+  ///////////////////////////////////////////////////////////////////
+  // SETUP X AXIS -- this shouldn't change on an update
+  var yScales = [];
+  var xScale = d3.scale.linear();
+  xScale.domain(x_domain).range([0, canvas_width]);
+  var xAxis = d3.svg.axis().scale(xScale).tickValues([]).orient("top");
+  canvas.append("g").attr({"class": "x_axis"}).call(xAxis);
+  // axis labels
+  canvas.append("text").attr({"class": "axis_label", "x":xScale(20), "y": -10})
+                      .style("text-anchor", "middle")
+                      .text("");
+  ////////////////////////////////////////////////////////////////////
+  // setup environment indicator
+  ///////////////////////////////////////////////////////////////////
+  // Draw environment indicator
+  var env_canvas = canvas.append("g").attr({"class": "env_canvas"});
+  // slice environment sequence
+  environment_sequence = slice_env_sequence(environment_sequence);
+
+  ////////////////////////////////////////////////////////////////////
+  // setup display data
+  ///////////////////////////////////////////////////////////////////
   // Build data canvas
   var data_canvas = canvas.append("g").attr({"class": "data_canvas"});
   // Grab initial type of data to display (plastic, nonplastic, or all)
@@ -234,8 +227,52 @@ var data_callback = function(data) {
   // Slice data to dispaly ranges
   display_data = slice_data(display_data);
 
+
   var update = function() {
     // Here's where we draw the visualization
+    ///////////////////////////////////////////////////////
+    // Update canvas
+    ///////////////////////////////////////////////////////
+    frame.attr({"width": frame_width, "height": frame_height});
+    canvas.attr({"transform": "translate(" + margin.left + "," + margin.top + ")"});
+    ///////////////////////////////////////////////////////
+    // Update vertical axis
+    ///////////////////////////////////////////////////////
+    // clean up old axes
+    canvas.selectAll("g.y_axis").remove();
+    canvas.selectAll("text#y_axis_label").remove();
+    // update scales/axes
+    yScales = [];
+    var prev_range_end = 0;
+    for (var i = 0; i < display_ranges.length; i++) {
+      var current_range_end = prev_range_end + ( ( (display_ranges[i][1] - display_ranges[i][0]) / total_range) * (canvas_height - (spacer_length * (display_ranges.length - 1))))
+      var yScale = d3.scale.linear();
+      yScale.domain(display_ranges[i]).range([prev_range_end, current_range_end]);
+      yScales.push(yScale);
+      prev_range_end = current_range_end + spacer_length;
+      var tick_num = (display_ranges[i][1] - display_ranges[i][0]) / update_label_interval;
+      var yAxis = d3.svg.axis().scale(yScale).ticks(tick_num).orient("left");
+      canvas.append("g").attr({"class": "y_axis", "id": "y_axis-" + i}).call(yAxis);
+    }
+    // update axis label
+    canvas.append("text").attr({"id": "y_axis_label", "class": "axis_label", "x": 0 - (canvas_height/2), "y": 0 - (margin.left / 1.5), "transform": "rotate(-90)"})
+                          .style("text-anchor", "middle")
+                          .text("Update");
+    ///////////////////////////////////////////////////////
+    // Draw environment indicator
+    ///////////////////////////////////////////////////////
+    var env_blocks = env_canvas.selectAll("rect").data(environment_sequence);
+    env_blocks.enter().append("rect");
+    env_blocks.exit().remove();
+    env_blocks.attr({"y": function(d) { var si = get_range_id(d); return yScales[si](d.start); },
+                                                    "x": function(d) { return xScale(0); },
+                                                    "width": function(d) { return 5; },
+                                                    "height": function(d) { var si = get_range_id(d); return yScales[si](display_ranges[si][0] + d.duration) - yScales[si](display_ranges[si][0]); },
+                                                    "class": function(d) { return d.environment; },
+                                                });
+    ///////////////////////////////////////////////////////
+    // Draw display data
+    ///////////////////////////////////////////////////////
     // Add group for each lineage
     var lineages = data_canvas.selectAll("g").data(display_data, function(d) { return d.rep_id; });
     lineages.enter().append("g");
@@ -257,10 +294,11 @@ var data_callback = function(data) {
     });
   }
 
-
+  // Okay, now update the drawing
   update();
-
+  // Page component listeners
   $(document).ready(function () {
+    // lineage type filtering
     $("input[type='radio']").on("change", function(){
         display = $('input[name="display"]:checked').val();
         display_data = data.filter(function(d) { return d.treatment == treatment_name; })
@@ -276,30 +314,56 @@ var data_callback = function(data) {
         display_data = slice_data(display_data);
         update();
     });
-  });
-
-  $(".dropdown-menu li a").click(function(){
-    // update treatment name
-    treatment_name = $(this).attr("value");
-    // update paramters
-    update_parameters();
-    // update displayed treatment name in treatment selector
-    $(this).parents(".dropdown").find('.btn').html(settings[treatment_name]["hr_name"] + ' <span class="caret"></span>');
-    $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-    display_data = data.filter(function(d) { return d.treatment == treatment_name; })
-                       .filter(function(d) {
-                                      if (display == "plastic") {
-                                        return d.final_plastic == "True";
-                                      } else if (display == "nonplastic") {
-                                        return d.final_plastic == "False";
-                                      } else if (display == "all") {
-                                        return d;
-                                      }
-                                    });
-    display_data = slice_data(display_data);
-    update();
+    // treatment selection
+    $(".dropdown-menu li a").click(function(){
+      // update treatment name
+      treatment_name = $(this).attr("value");
+      // update paramters
+      update_parameters();
+      // update displayed treatment name in treatment selector
+      $(this).parents(".dropdown").find('.btn').html(settings[treatment_name]["hr_name"] + ' <span class="caret"></span>');
+      $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+      display_data = data.filter(function(d) { return d.treatment == treatment_name; })
+                         .filter(function(d) {
+                                        if (display == "plastic") {
+                                          return d.final_plastic == "True";
+                                        } else if (display == "nonplastic") {
+                                          return d.final_plastic == "False";
+                                        } else if (display == "all") {
+                                          return d;
+                                        }
+                                      });
+      display_data = slice_data(display_data);
+      environment_sequence = slice_env_sequence(environment_sequence);
+      update();
+    });
+    // zoom
+    $("#vis_zoom_in").click(function() {
+      // zoom in!
+      zoom_mult = zoom_mult + zoom_rate;
+      if (zoom_mult > 1.0) {
+        zoom_mult = 1.0;
+      }
+      update_parameters();
+      environment_sequence = slice_env_sequence(environment_sequence);
+      update();
+    });
+    $("#vis_zoom_out").click(function() {
+      // zoom out!
+      zoom_mult = zoom_mult - zoom_rate;
+      if (zoom_mult < 0.05) {
+        zoom_mult = 0.05;
+      }
+      update_parameters();
+      environment_sequence = slice_env_sequence(environment_sequence);
+      update();
+    });
   });
 }
 
-// Load data from csv
-d3.csv(data_fpath, data_accessor, data_callback);
+var main = function() {
+  update_parameters();
+  // Load data from csv
+  d3.csv(data_fpath, data_accessor, data_callback);
+}
+main();

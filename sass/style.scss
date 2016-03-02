@@ -113,6 +113,10 @@ $C1111-color: white;
     @extend .state_block;
     fill: lighten($C0101-color, 5);
   }
+  .nandpnotp {
+    @extend .state_block;
+    fill: mix($C1010-color, $C0101-color);
+  }
 }
 
 .data_canvas {

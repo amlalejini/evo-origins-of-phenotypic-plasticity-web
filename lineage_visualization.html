@@ -50,11 +50,12 @@
       <div class="row">
         <div class="col-md-4">
           <div class="lineage_filter_options">
-            <input class="lineage_type_filter" id="plastic_cb" type="radio" name="display" value="plastic" checked>Plastic Only</input>
+            <input class="lineage_type_filter" id="plastic_cb" type="radio" name="display" value="plastic">Plastic Only</input>
             <input class="lineage_type_filter" id="nonplastic_cb" type="radio" name="display" value="nonplastic" >Non-plastic Only</input>
-            <input class="lineage_type_filter" id="all_cb" type="radio" name="display" value="all"> All </input>
+            <input class="lineage_type_filter" id="all_cb" type="radio" name="display" value="all" checked> All </input>
           </div>
         </div>
+
         <div class="col-md-4">
           <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="treatment_selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -71,6 +72,23 @@
             </ul>
           </div>
         </div>
+        <div class="col-md-4">
+          <div class="btn-group" role="group" aria-label="vis_zoom">
+            <button type="button" class="btn btn-default" id="vis_zoom_in">
+              <span class="glyphicon glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-default" id="vis_zoom_out">
+              <span class="glyphicon glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div data-role="rangeslider">
+        <label for="price-min">Price:</label>
+        <input type="range" name="price-min" id="price-min" value="200" min="0" max="1000">
+        <label for="price-max">Price:</label>
+        <input type="range" name="price-max" id="price-max" value="800" min="0" max="1000">
       </div>
 
       <div class="row">

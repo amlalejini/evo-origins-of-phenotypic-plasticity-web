@@ -1,3 +1,4 @@
+var zoom_rate = 0.05;
 var default_treatment = "io-sense-only";
 var lineage_vis_data_fpath = "data/lineage_states.csv";
 var lineage_vis_settings =

@@ -1,4 +1,4 @@
-.state_block, .env_canvas .nandpnotm, .env_canvas .nandmnotp, .data_canvas .C0000, .data_canvas .C0001, .data_canvas .C0010, .data_canvas .C0011, .data_canvas .C0100, .data_canvas .C0101, .data_canvas .C0110, .data_canvas .C0111, .data_canvas .C1000, .data_canvas .C1001, .data_canvas .C1010, .data_canvas .C1011, .data_canvas .C1100, .data_canvas .C1101, .data_canvas .C1110, .data_canvas .C1111 {
+.state_block, .env_canvas .nandpnotm, .env_canvas .nandmnotp, .env_canvas .nandpnotp, .data_canvas .C0000, .data_canvas .C0001, .data_canvas .C0010, .data_canvas .C0011, .data_canvas .C0100, .data_canvas .C0101, .data_canvas .C0110, .data_canvas .C0111, .data_canvas .C1000, .data_canvas .C1001, .data_canvas .C1010, .data_canvas .C1011, .data_canvas .C1100, .data_canvas .C1101, .data_canvas .C1110, .data_canvas .C1111 {
   stroke: black; }
 
 #legend tr .C0000 {
@@ -58,6 +58,8 @@
   fill: #4d4dff; }
 .env_canvas .nandmnotp {
   fill: #00e6e6; }
+.env_canvas .nandpnotp {
+  fill: #1a80e6; }
 
 .data_canvas .line, .data_canvas .nandpnotm_line, .data_canvas .nandmnotp_line {
   fill: none;
