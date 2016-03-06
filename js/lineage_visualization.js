@@ -18,8 +18,8 @@ var environment_sequence  = null;
 var display_full          = false;
 var zoom_mult             = 0.20;
 // canvas parameters; TODO: move all of these values to param js file
-var margin = {top: 20, right: 10, bottom: 20, left: 100};
-var frame_width = 1000;
+var margin = {top: 20, right: 40, bottom: 20, left: 100};
+var frame_width = 940;
 var frame_height = 1500;
 var canvas_width = frame_width - margin.left - margin.right;
 var canvas_height = frame_height - margin.top - margin.bottom;
@@ -69,7 +69,7 @@ var update_parameters = function() {
   ////////////////////////////
   // Update frame/canvas parameters
   ////////////////////////////
-  frame_width = 1000; // at some point, this may actually be a variable parameters, but that day is not today
+  frame_width = $("#vis_panel").width() - 20; // at some point, this may actually be a variable parameters, but that day is not today
   frame_height = total_range * zoom_mult;
   canvas_width = frame_width - margin.left - margin.right;
   canvas_height = frame_height - margin.top - margin.bottom;
@@ -193,16 +193,7 @@ var data_callback = function(data) {
   ////////////////////////////////////////////////////////////////////
   // setup axes
   ///////////////////////////////////////////////////////////////////
-  // SETUP X AXIS -- this shouldn't change on an update
   var yScales = [];
-  var xScale = d3.scale.linear();
-  xScale.domain(x_domain).range([0, canvas_width]);
-  var xAxis = d3.svg.axis().scale(xScale).tickValues([]).orient("top");
-  canvas.append("g").attr({"class": "x_axis"}).call(xAxis);
-  // axis labels
-  canvas.append("text").attr({"class": "axis_label", "x":xScale(20), "y": -10})
-                      .style("text-anchor", "middle")
-                      .text("");
   ////////////////////////////////////////////////////////////////////
   // setup environment indicator
   ///////////////////////////////////////////////////////////////////
@@ -243,6 +234,18 @@ var data_callback = function(data) {
     ///////////////////////////////////////////////////////
     // Update vertical axis
     ///////////////////////////////////////////////////////
+    // SETUP X AXIS -- this shouldn't change on an update
+    // clean up old axes
+    canvas.selectAll("g.x_axis").remove();
+    canvas.selectAll("text#x_axis_label").remove();
+    var xScale = d3.scale.linear();
+    xScale.domain(x_domain).range([0, canvas_width]);
+    var xAxis = d3.svg.axis().scale(xScale).tickValues([]).orient("top");
+    canvas.append("g").attr({"class": "x_axis"}).call(xAxis);
+    // axis labels
+    canvas.append("text").attr({"id": "x_axis_label", "class": "axis_label", "x":xScale(20), "y": -10})
+                        .style("text-anchor", "middle")
+                        .text("");
     // clean up old axes
     canvas.selectAll("g.y_axis").remove();
     canvas.selectAll("text#y_axis_label").remove();
@@ -291,9 +294,9 @@ var data_callback = function(data) {
       state_blocks.enter().append("rect");
       state_blocks.exit().remove();
       state_blocks.attr({"y": function(d) { var si = get_range_id(d); return yScales[si](d.start); },
-                         "x": function(d) { return xScale(1.05 * i + 3); },
+                         "x": function(d) { return xScale(1.25 * i + 3); },
                          "height": function(d) { var si = get_range_id(d); return yScales[si](display_ranges[si][0] + d.duration) - yScales[si](display_ranges[si][0]); },
-                         "width": function(d) { return 10; },
+                         "width": function(d) { return xScale(0.95); },
                          "class": function(d) { return d.state; }
                        });
     });
@@ -369,6 +372,13 @@ var data_callback = function(data) {
       display_full = $(this).prop("checked");
       update_parameters();
       display_data = slice_data(full_data);
+      environment_sequence = slice_env_sequence(environment_sequence);
+      update();
+    });
+
+    $(window).resize(function () {
+      console.log("Resize");
+      update_parameters();
       environment_sequence = slice_env_sequence(environment_sequence);
       update();
     });
