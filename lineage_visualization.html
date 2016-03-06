@@ -30,11 +30,20 @@
         <div class = "col-md-6">
           <div class="row"> <!-- about panel row -->
             <div class="col-md-12">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h2> About </h2>
+              <div class="panel panel-lalejini">
+                <div class="panel-heading" role="tab" id="about-heading">
+                  <h2>
+                    <a class="collapsed" role="button" data-toggle="collapse" href="#collapseAbout" aria-expanded="false" aria-controls="collapseAbout">
+                       About
+                    </a>
+                  </h2>
                 </div>
-                <div class="panel-body">
+                <div id="collapseAbout" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="about-heading">
+                  <div class="panel-body">
+                    <p>
+                    To explore evolutionary strategies evolved in fluctuating environments, we visualized the lineages of evolved genotypes as vertical bars where time (in updates) proceeds from top to bottom beginning with lineage's original ancestor genotype. Any given genotype on the lineage must express one of the sixteen possible phenotypes enumerated to the right in the Legend. At each point in time, the color of the visualized lineage corresponds to the color representing the phenotype expressed by the lineage at that point in time. For example, because the ancestral organism is capable only of self-replication, all visualized lineages should show that the original ancestor's phenotype performed neither the NAND task nor the NOT task. In addition to the visualized lineages, we indicate the actual environmental conditions experienced by the evolving populations at each point in time by the color of the vertical axis. This type of visualization allows us to display the phenotypic states traversed by any given lineage, which allowed us to explore evolutionary strategies leveraged by all evolved lineages.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -42,32 +51,34 @@
 
         </div> <!-- end col -->
         <div class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h2> Legend </h2>
+          <div class="panel panel-lalejini">
+            <div class="panel-heading" role="tab" id="legend-heading">
+              <h2>
+                <a class="collapsed" role="button" data-toggle="collapse" href="#collapseLegend" aria-expanded="false" aria-controls="collapseLegend">
+                   Legend
+                </a>
+              </h2>
             </div>
-            <div class="panel-body">
-              <div class ="img-default" id="lineage_vis_legend">
-                <img src="imgs/task-profiles.png" alt="Legend" class="img-responsive"></img>
+            <div id="collapseLegend" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="legend-heading">
+              <div class="panel-body" id="legend-panel-body">
+                <div class ="img-default" id="lineage_vis_legend">
+                  <img src="imgs/task-profiles.png" alt="Legend" class="img-responsive"></img>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
-
-
-
 
       <div class="row">
         <div class="col-md-12">
-          <div class="panel panel-default">
+          <div class="panel panel-lalejini">
             <div class="panel-heading">
               <h2> Dashboard </h2>
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <!-- Treatment selection -->
                   <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="treatment_selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -84,7 +95,7 @@
                     </ul>
                   </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                   <!-- Lineage filtering options -->
                   <div class="lineage_filter_options">
                     <input class="lineage_type_filter" id="plastic_cb" type="radio" name="display" value="plastic">Plastic Only</input>
@@ -116,12 +127,14 @@
       </div> <!-- end row -->
 
       <div class="row">
-        <div class="panel panel-default" id="vis_panel">
-          <div class="panel-heading">
-            <h2> Visualization </h2>
-          </div>
-          <div class="panel-body">
-            <div id="chart_area"></div>
+        <div class="col-md-12">
+          <div class="panel panel-lalejini" id="vis_panel">
+            <div class="panel-heading">
+              <h2> Visualization </h2>
+            </div>
+            <div class="panel-body">
+              <div id="chart_area"></div>
+            </div>
           </div>
         </div>
 
@@ -130,6 +143,10 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
       <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
+      <script>
+        $('#collapseLegend').collapse("hide");
+        $('#collapseAbout').collapse("hide");
+      </script>
       <!-- Include d3 js -->
       <script src="//d3js.org/d3.v3.min.js"></script>
       <!-- Include my script -->

@@ -5,10 +5,10 @@
 //////////////////////////////////////////////////////////////
 $primary-color: #333333;
 $secondary-color: #0077B8;
-$tertiary-color: #77216F;
+$tertiary-color: darken($primary-color, 25);
 $primary-text-color: lighten($primary-color, 65);
 
-$canvas-color: $primary-text-color;
+$canvas-color: lighten($primary-color, 85);
 
 $C0000-color: lighten(black, 30);
 $C0001-color: lighten(red, 15);
@@ -66,7 +66,6 @@ body {
   }
 }
 
-
 // This makes nav-justified play nicely
 .navbar-nav.nav-justified > li {
     float:none;
@@ -78,6 +77,45 @@ body {
 	background-color: darken($primary-color, 7);
   border: none;
 }
+
+.panel-lalejini {
+  @extend .panel-default;
+  background-color: darken($primary-color, 5);
+  border-color: $secondary-color;
+  margin-right: 25px;
+  .panel-heading {
+    background-color: darken($primary-color, 5);
+    border-color: $secondary-color;
+    a {
+      text-decoration: none;
+    }
+  }
+
+  dl {
+    dt {
+      color: lighten($secondary-color, 10);
+      a {
+        color: lighten($secondary-color, 10);
+      }
+    }
+    dd {
+      color: darken($primary-text-color, 20);
+    }
+  }
+
+}
+
+#lineage_vis_legend {
+  background-color: $canvas-color;
+}
+
+
+
+h2 {
+  color: $secondary-color;
+}
+
+
 
 //////////////////////////////////////////////////////////////
 // Visualization

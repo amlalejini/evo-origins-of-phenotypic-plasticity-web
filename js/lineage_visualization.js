@@ -377,7 +377,6 @@ var data_callback = function(data) {
     });
 
     $(window).resize(function () {
-      console.log("Resize");
       update_parameters();
       environment_sequence = slice_env_sequence(environment_sequence);
       update();

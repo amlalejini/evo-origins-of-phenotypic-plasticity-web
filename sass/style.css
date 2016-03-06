@@ -4898,18 +4898,18 @@ button.list-group-item-danger {
     .panel-group .panel-footer + .panel-collapse .panel-body {
       border-bottom: 1px solid #ddd; }
 
-.panel-default {
+.panel-default, .panel-lalejini {
   border-color: #ddd; }
-  .panel-default > .panel-heading {
+  .panel-default > .panel-heading, .panel-lalejini > .panel-heading {
     color: #333333;
     background-color: #f5f5f5;
     border-color: #ddd; }
-    .panel-default > .panel-heading + .panel-collapse > .panel-body {
+    .panel-default > .panel-heading + .panel-collapse > .panel-body, .panel-lalejini > .panel-heading + .panel-collapse > .panel-body {
       border-top-color: #ddd; }
-    .panel-default > .panel-heading .badge {
+    .panel-default > .panel-heading .badge, .panel-lalejini > .panel-heading .badge {
       color: #f5f5f5;
       background-color: #333333; }
-  .panel-default > .panel-footer + .panel-collapse > .panel-body {
+  .panel-default > .panel-footer + .panel-collapse > .panel-body, .panel-lalejini > .panel-footer + .panel-collapse > .panel-body {
     border-bottom-color: #ddd; }
 
 .panel-primary {
@@ -5829,6 +5829,28 @@ body {
   background-color: #212121;
   border: none; }
 
+.panel-lalejini {
+  background-color: #262626;
+  border-color: #0077B8;
+  margin-right: 25px; }
+  .panel-lalejini .panel-heading {
+    background-color: #262626;
+    border-color: #0077B8; }
+    .panel-lalejini .panel-heading a {
+      text-decoration: none; }
+  .panel-lalejini dl dt {
+    color: #0098eb; }
+    .panel-lalejini dl dt a {
+      color: #0098eb; }
+  .panel-lalejini dl dd {
+    color: #a6a6a6; }
+
+#lineage_vis_legend {
+  background-color: white; }
+
+h2 {
+  color: #0077B8; }
+
 .state_block, .env_canvas .nandpnotm, .env_canvas .nandmnotp, .env_canvas .nandpnotp, .data_canvas .C0000, .data_canvas .C0001, .data_canvas .C0010, .data_canvas .C0011, .data_canvas .C0100, .data_canvas .C0101, .data_canvas .C0110, .data_canvas .C0111, .data_canvas .C1000, .data_canvas .C1001, .data_canvas .C1010, .data_canvas .C1011, .data_canvas .C1100, .data_canvas .C1101, .data_canvas .C1110, .data_canvas .C1111 {
   stroke: black; }
 
@@ -5870,7 +5892,7 @@ body {
   margin: 0 auto; }
 
 #chart_area {
-  background-color: #d9d9d9; }
+  background-color: white; }
 
 .nandpnotm_points {
   fill: red;
