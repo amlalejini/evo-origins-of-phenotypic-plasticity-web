@@ -5,7 +5,8 @@ var lineage_vis_settings =
 {
   "io-sense-control": {
     "hr_name": "Control",
-    "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "sliced_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "full_ranges": [[0, 100000]],
     "environment_cycle_length": 100000,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotp"],
@@ -14,7 +15,8 @@ var lineage_vis_settings =
   },
   "io-sense-cycle-50": {
     "hr_name": "Short Environment Cycle Length",
-    "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "sliced_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "full_ranges": [[0, 100000]],
     "environment_cycle_length": 50,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotm", "nandmnotp"],
@@ -24,7 +26,8 @@ var lineage_vis_settings =
   },
   "io-sense-cycle-200": {
     "hr_name": "Long Environment Cycle Length Treatment",
-    "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "sliced_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "full_ranges": [[0, 100000]],
     "environment_cycle_length": 200,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotm", "nandmnotp"],
@@ -33,7 +36,8 @@ var lineage_vis_settings =
   },
   "io-sense-mut": {
     "hr_name": "Low Mutation Rate Treatment",
-    "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "sliced_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "full_ranges": [[0, 100000]],
     "environment_cycle_length": 100,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotm", "nandmnotp"],
@@ -42,7 +46,8 @@ var lineage_vis_settings =
   },
   "io-sense-mut-high": {
     "hr_name": "High Mutation Rate Treatment",
-    "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "sliced_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "full_ranges": [[0, 100000]],
     "environment_cycle_length": 100,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotm", "nandmnotp"],
@@ -51,7 +56,8 @@ var lineage_vis_settings =
   },
   "io-sense-only": {
     "hr_name": "Baseline Treatment",
-    "show_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "sliced_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "full_ranges": [[0, 100000]],
     "environment_cycle_length": 100,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotm", "nandmnotp"],

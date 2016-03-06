@@ -15,9 +15,10 @@ var update_label_interval = null;
 var max_reps              = null;
 var total_range           = null;
 var environment_sequence  = null;
+var display_full          = false;
 var zoom_mult             = 0.20;
 // canvas parameters; TODO: move all of these values to param js file
-var margin = {top: 20, right: 20, bottom: 300, left: 100};
+var margin = {top: 20, right: 10, bottom: 20, left: 100};
 var frame_width = 1000;
 var frame_height = 1500;
 var canvas_width = frame_width - margin.left - margin.right;
@@ -32,7 +33,9 @@ var update_parameters = function() {
   // UPDATE GLOBAL PARAMETERS
   ////////////////////////////
   hr_name = settings[treatment_name]["hr_name"];                        // Human readable name for treatment
-  display_ranges = settings[treatment_name]["show_ranges"];             // Lineage time-slices
+  var rdisp = null;
+  if (display_full) { rdisp = "full_ranges"; } else { rdisp = "sliced_ranges"; }
+  display_ranges = settings[treatment_name][rdisp];             // Lineage time-slices
   max_update = settings[treatment_name]["maximum_update"];              // Max update for treatment
   cycle_length = settings[treatment_name]["environment_cycle_length"];  // Environment cycle length for treatment
   environment_codes = settings[treatment_name]["environment_codes"];         // Environment codes (in order)
@@ -73,7 +76,7 @@ var update_parameters = function() {
   ////////////////////////////
   // update axis parameters
   ////////////////////////////
-  x_domain = [0, max_reps * 1.5 + 3];    // Range of values x can take on
+  x_domain = [0, max_reps * 1.25 + 3];    // Range of values x can take on
   y_domain = [0, max_update];            // Range of values y can take on
 }
 
@@ -172,6 +175,8 @@ var data_callback = function(data) {
   ////////////////////////////////////////////////////////////////////
   // Set treatment selector text to current treatment name
   $("#treatment_selector").html(settings[treatment_name]["hr_name"] + "<span class='caret'></span>");
+  // To slice or not to slice
+  display_full = $("slice_toggle").prop("checked");
   // Update parameters based on current treatment name
   update_parameters();
 
@@ -214,7 +219,8 @@ var data_callback = function(data) {
   // Grab initial type of data to display (plastic, nonplastic, or all)
   var display = $('input[name="display"]:checked').val();
   // Filter data by display and treatment
-  var display_data = data.filter(function(d) { return d.treatment == treatment_name; } )
+  var display_data = null;
+  var full_data = data.filter(function(d) { return d.treatment == treatment_name; } )
                          .filter(function(d) {
                                     if (display == "plastic") {
                                       return d.final_plastic == "True";
@@ -225,8 +231,7 @@ var data_callback = function(data) {
                                     }
                                   });
   // Slice data to dispaly ranges
-  display_data = slice_data(display_data);
-
+  var display_data = slice_data(full_data);
 
   var update = function() {
     // Here's where we draw the visualization
@@ -286,7 +291,7 @@ var data_callback = function(data) {
       state_blocks.enter().append("rect");
       state_blocks.exit().remove();
       state_blocks.attr({"y": function(d) { var si = get_range_id(d); return yScales[si](d.start); },
-                         "x": function(d) { return xScale(1.2 * i + 3); },
+                         "x": function(d) { return xScale(1.05 * i + 3); },
                          "height": function(d) { var si = get_range_id(d); return yScales[si](display_ranges[si][0] + d.duration) - yScales[si](display_ranges[si][0]); },
                          "width": function(d) { return 10; },
                          "class": function(d) { return d.state; }
@@ -301,7 +306,7 @@ var data_callback = function(data) {
     // lineage type filtering
     $("input[type='radio']").on("change", function(){
         display = $('input[name="display"]:checked').val();
-        display_data = data.filter(function(d) { return d.treatment == treatment_name; })
+        full_data = data.filter(function(d) { return d.treatment == treatment_name; })
                            .filter(function(d) {
                                           if (display == "plastic") {
                                             return d.final_plastic == "True";
@@ -311,7 +316,7 @@ var data_callback = function(data) {
                                             return d;
                                           }
                                         });
-        display_data = slice_data(display_data);
+        display_data = slice_data(full_data);
         update();
     });
     // treatment selection
@@ -323,7 +328,7 @@ var data_callback = function(data) {
       // update displayed treatment name in treatment selector
       $(this).parents(".dropdown").find('.btn').html(settings[treatment_name]["hr_name"] + ' <span class="caret"></span>');
       $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-      display_data = data.filter(function(d) { return d.treatment == treatment_name; })
+      full_data = data.filter(function(d) { return d.treatment == treatment_name; })
                          .filter(function(d) {
                                         if (display == "plastic") {
                                           return d.final_plastic == "True";
@@ -333,7 +338,7 @@ var data_callback = function(data) {
                                           return d;
                                         }
                                       });
-      display_data = slice_data(display_data);
+      display_data = slice_data(full_data);
       environment_sequence = slice_env_sequence(environment_sequence);
       update();
     });
@@ -358,6 +363,16 @@ var data_callback = function(data) {
       environment_sequence = slice_env_sequence(environment_sequence);
       update();
     });
+
+    // slice vs. full
+    $("#slice_toggle").change(function() {
+      display_full = $(this).prop("checked");
+      update_parameters();
+      display_data = slice_data(full_data);
+      environment_sequence = slice_env_sequence(environment_sequence);
+      update();
+    });
+
   });
 }
 
@@ -366,4 +381,7 @@ var main = function() {
   // Load data from csv
   d3.csv(data_fpath, data_accessor, data_callback);
 }
+
+
+
 main();

@@ -1,6 +1,14 @@
-.state_block {
-  stroke: black;
-}
+// Library Imports
+@import "bootstrap/_bootstrap.scss";
+//////////////////////////////////////////////////////////////
+// Variables
+//////////////////////////////////////////////////////////////
+$primary-color: #333333;
+$secondary-color: #0077B8;
+$tertiary-color: #77216F;
+$primary-text-color: lighten($primary-color, 65);
+
+$canvas-color: $primary-text-color;
 
 $C0000-color: lighten(black, 30);
 $C0001-color: lighten(red, 15);
@@ -18,6 +26,65 @@ $C1100-color: lighten(grey, 30);
 $C1101-color: darken(#FFB6C1, 5);
 $C1110-color: lighten(green, 5);
 $C1111-color: white;
+
+//////////////////////////////////////////////////////////////
+// Project Site -- General
+//////////////////////////////////////////////////////////////
+body {
+  font-family: 'Ubuntu', sans-serif;
+	color: $primary-text-color;
+  background: $primary-color;
+}
+
+
+.jumbotron {
+  text-align: center;
+  background: none;
+  padding-bottom: 5em;
+	padding-top: 5em;
+	margin: 0 0 0 0;
+  .banner_link {
+    color: $primary-text-color;
+    &:hover {
+        color: $primary-text-color;
+        text-decoration: none;
+    }
+  }
+}
+
+.navbar-lalejini {
+  @extend .navbar-default;
+  background-color: darken($primary-color, 5);
+  border: none;
+
+}
+
+.navbar-default .navbar-nav > li > a, .navbar-lalejini .navbar-nav > li > a {
+  color: $secondary-color;
+  &:hover {
+    color: darken($secondary-color, 10);
+  }
+}
+
+
+// This makes nav-justified play nicely
+.navbar-nav.nav-justified > li {
+    float:none;
+
+}
+
+.well {
+  @extend .well;
+	background-color: darken($primary-color, 7);
+  border: none;
+}
+
+//////////////////////////////////////////////////////////////
+// Visualization
+//////////////////////////////////////////////////////////////
+.state_block {
+  stroke: black;
+}
 
 #legend {
   tr {
@@ -78,7 +145,7 @@ $C1111-color: white;
 }
 
 #chart_area {
-  //background-color: red;
+  background-color: $canvas-color;
 }
 
 .nandpnotm_points {
