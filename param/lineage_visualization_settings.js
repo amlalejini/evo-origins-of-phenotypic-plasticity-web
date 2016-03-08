@@ -65,3 +65,28 @@ var lineage_vis_settings =
     "max_reps": 50
   }
 };
+
+
+lookup_table = {
+  "nandpnotp": "CONTROL-ENV",
+  "nandpnotm": "ENV-NAND",
+  "nandmnotp": "ENV-NOT",
+  "tasks_performed": {
+    "C0000": {"ENV-NAND": "NONE", "ENV-NOT": "NONE"},
+    "C0001": {"ENV-NAND": "NONE", "ENV-NOT": "NOT"},
+    "C0010": {"ENV-NAND": "NONE", "ENV-NOT": "NAND"},
+    "C0011": {"ENV-NAND": "NONE", "ENV-NOT": "BOTH"},
+    "C0100": {"ENV-NAND": "NOT", "ENV-NOT": "NONE"},
+    "C0101": {"ENV-NAND": "NOT", "ENV-NOT": "NOT"},
+    "C0110": {"ENV-NAND": "NOT", "ENV-NOT": "NAND"},
+    "C0111": {"ENV-NAND": "NOT", "ENV-NOT": "BOTH"},
+    "C1000": {"ENV-NAND": "NAND", "ENV-NOT": "NONE"},
+    "C1001": {"ENV-NAND": "NAND", "ENV-NOT": "NOT"},
+    "C1010": {"ENV-NAND": "NAND", "ENV-NOT": "NAND"},
+    "C1011": {"ENV-NAND": "NAND", "ENV-NOT": "BOTH"},
+    "C1100": {"ENV-NAND": "BOTH", "ENV-NOT": "NONE"},
+    "C1101": {"ENV-NAND": "BOTH", "ENV-NOT": "NOT"},
+    "C1110": {"ENV-NAND": "BOTH", "ENV-NOT": "NAND"},
+    "C1111": {"ENV-NAND": "BOTH", "ENV-NOT": "BOTH"}
+  }
+};

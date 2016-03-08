@@ -5851,41 +5851,26 @@ body {
 h2 {
   color: #0077B8; }
 
-.state_block, .env_canvas .nandpnotm, .env_canvas .nandmnotp, .env_canvas .nandpnotp, .data_canvas .C0000, .data_canvas .C0001, .data_canvas .C0010, .data_canvas .C0011, .data_canvas .C0100, .data_canvas .C0101, .data_canvas .C0110, .data_canvas .C0111, .data_canvas .C1000, .data_canvas .C1001, .data_canvas .C1010, .data_canvas .C1011, .data_canvas .C1100, .data_canvas .C1101, .data_canvas .C1110, .data_canvas .C1111 {
-  stroke: black; }
+.t-tip {
+  background-color: #333333;
+  color: #d9d9d9;
+  padding: 7px; }
+  .t-tip table, .t-tip th, .t-tip td {
+    border: 1px solid #d9d9d9;
+    text-align: center;
+    padding: 3px; }
 
-#legend tr .C0000 {
-  background-color: #4d4d4d; }
-#legend tr .C0001 {
-  background-color: #ff4d4d; }
-#legend tr .C0010 {
-  background-color: #009a00; }
-#legend tr .C0011 {
-  background-color: #cdcdcd; }
-#legend tr .C0100 {
-  background-color: #009a00; }
-#legend tr .C0101 {
-  background-color: #00cccc; }
-#legend tr .C0110 {
-  background-color: #009a00; }
-#legend tr .C0111 {
-  background-color: #009a00; }
-#legend tr .C1000 {
-  background-color: #990000; }
-#legend tr .C1001 {
-  background-color: #ffdb1a; }
-#legend tr .C1010 {
-  background-color: #3333ff; }
-#legend tr .C1011 {
-  background-color: #b300b3; }
-#legend tr .C1100 {
-  background-color: #cdcdcd; }
-#legend tr .C1101 {
-  background-color: #ff9dab; }
-#legend tr .C1110 {
-  background-color: #009a00; }
-#legend tr .C1111 {
-  background-color: white; }
+.state_block, .env_block, .env_canvas .nandpnotm, .env_canvas .nandmnotp, .env_canvas .nandpnotp, .data_canvas .C0000, .data_canvas .C0001, .data_canvas .C0010, .data_canvas .C0011, .data_canvas .C0100, .data_canvas .C0101, .data_canvas .C0110, .data_canvas .C0111, .data_canvas .C1000, .data_canvas .C1001, .data_canvas .C1010, .data_canvas .C1011, .data_canvas .C1100, .data_canvas .C1101, .data_canvas .C1110, .data_canvas .C1111 {
+  position: relative;
+  z-index: 1;
+  stroke: black; }
+  .state_block:hover, .env_block:hover, .env_canvas .nandpnotm:hover, .env_canvas .nandmnotp:hover, .env_canvas .nandpnotp:hover, .data_canvas .C0000:hover, .data_canvas .C0001:hover, .data_canvas .C0010:hover, .data_canvas .C0011:hover, .data_canvas .C0100:hover, .data_canvas .C0101:hover, .data_canvas .C0110:hover, .data_canvas .C0111:hover, .data_canvas .C1000:hover, .data_canvas .C1001:hover, .data_canvas .C1010:hover, .data_canvas .C1011:hover, .data_canvas .C1100:hover, .data_canvas .C1101:hover, .data_canvas .C1110:hover, .data_canvas .C1111:hover {
+    stroke-width: 3px;
+    z-index: 100; }
+
+.env_block:hover, .env_canvas .nandpnotm:hover, .env_canvas .nandmnotp:hover, .env_canvas .nandpnotp:hover {
+  stroke-width: 3px;
+  z-index: 100; }
 
 .lineage_filter_options {
   float: none;

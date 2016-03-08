@@ -120,60 +120,33 @@ h2 {
 //////////////////////////////////////////////////////////////
 // Visualization
 //////////////////////////////////////////////////////////////
-.state_block {
-  stroke: black;
+.t-tip {
+  background-color: $primary-color;
+  color: $primary-text-color;
+  padding: 7px;
+  table, th, td {
+    border: 1px solid $primary-text-color;
+    text-align: center;
+    padding: 3px;
+
+  }
 }
 
-#legend {
-  tr {
-    .C0000 {
-      background-color: $C0000-color;
-    }
-    .C0001 {
-      background-color: $C0001-color;
-    }
-    .C0010 {
-      background-color: $C0010-color;
-    }
-    .C0011 {
-      background-color: $C0011-color;
-    }
-    .C0100 {
-      background-color: $C0100-color;
-    }
-    .C0101 {
-      background-color: $C0101-color;
-    }
-    .C0110 {
-      background-color: $C0110-color;
-    }
-    .C0111 {
-      background-color: $C0111-color;
-    }
-    .C1000 {
-      background-color: $C1000-color;
-    }
-    .C1001 {
-      background-color: $C1001-color;
-    }
-    .C1010 {
-      background-color: $C1010-color;
-    }
-    .C1011 {
-      background-color: $C1011-color;
-    }
-    .C1100 {
-      background-color: $C1100-color;
-    }
-    .C1101 {
-      background-color: $C1101-color;
-    }
-    .C1110 {
-      background-color: $C1110-color;
-    }
-    .C1111 {
-      background-color: $C1111-color;
-    }
+.state_block {
+  position: relative;
+  z-index: 1;
+  stroke: black;
+  &:hover {
+    stroke-width: 3px;
+    z-index: 100;
+  }
+}
+
+.env_block {
+  @extend .state_block;
+  &:hover {
+    stroke-width: 3px;
+    z-index:100;
   }
 }
 
@@ -211,15 +184,15 @@ h2 {
 
 .env_canvas {
   .nandpnotm {
-    @extend .state_block;
+    @extend .env_block;
     fill: lighten($C1010-color, 5);
   }
   .nandmnotp {
-    @extend .state_block;
+    @extend .env_block;
     fill: lighten($C0101-color, 5);
   }
   .nandpnotp {
-    @extend .state_block;
+    @extend .env_block;
     fill: mix($C1010-color, $C0101-color);
   }
 }

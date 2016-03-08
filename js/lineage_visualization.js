@@ -28,6 +28,13 @@ var x_domain = null;    // Range of values x can take on
 var y_domain = null;            // Range of values y can take on
 var spacer_length = 20;
 
+var tooltip = d3.select("body")
+                        .append("div")
+                        .attr({"class": "t-tip"})
+                        .style("position", "absolute")
+                        .style("z-index", "10")
+                        .style("visibility", "hidden");
+
 var update_parameters = function() {
   ////////////////////////////
   // UPDATE GLOBAL PARAMETERS
@@ -107,7 +114,7 @@ var slice_env_sequence = function(sequence) {
       if ((start <= display_ranges[ri][1] && start >= display_ranges[ri][0]) ||
           (end <= display_ranges[ri][1] && end >= display_ranges[ri][0]) ||
           start <= display_ranges[ri][0] && end >= display_ranges[ri][1]) {
-          var clipped_state = {"environment": sequence[si]["environment"], "start": start, "duration": sequence[si]["duration"]};
+          var clipped_state = {"environment": sequence[si]["environment"], "start": start, "duration": sequence[si]["duration"], "true_start": start, "true_duration": sequence[si]["duration"]};
           if (start < display_ranges[ri][0]) {
             clipped_state.start = display_ranges[ri][0];
             clipped_state.duration = end - clipped_state.start;
@@ -139,7 +146,7 @@ var slice_data = function(data) {
             (end <= display_ranges[ri][1] && end >= display_ranges[ri][0]) ||
             start <= display_ranges[ri][0] && end >= display_ranges[ri][1]) {
           // clip to range if necessary
-          var clipped_state = {state: data[i].state_sequence[si].state, duration: data[i].state_sequence[si].duration, start: data[i].state_sequence[si].start};
+          var clipped_state = {state: data[i].state_sequence[si].state, duration: data[i].state_sequence[si].duration, start: data[i].state_sequence[si].start, true_start: data[i].state_sequence[si].start, true_duration: data[i].state_sequence[si].duration};
           if (start < display_ranges[ri][0]) {
             clipped_state.start = display_ranges[ri][0];
             clipped_state.duration = end - clipped_state.start;
@@ -278,6 +285,13 @@ var data_callback = function(data) {
                                                     "height": function(d) { var si = get_range_id(d); return yScales[si](display_ranges[si][0] + d.duration) - yScales[si](display_ranges[si][0]); },
                                                     "class": function(d) { return d.environment; },
                                                 });
+    env_blocks.on("mouseover", function(d) {
+                                var cur_env = lookup_table[d.environment];
+                                return tooltip.style("visibility", "visible")
+                                              .html("Environment: " + cur_env + "<br/>Start Update: " + d.true_start + "<br/>Duration: " + d.true_duration);
+                              })
+              .on("mousemove", function() { return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px"); })
+              .on("mouseout", function() { return tooltip.style("visibility", "hidden"); });
     ///////////////////////////////////////////////////////
     // Draw display data
     ///////////////////////////////////////////////////////
@@ -299,6 +313,18 @@ var data_callback = function(data) {
                          "width": function(d) { return xScale(0.95); },
                          "class": function(d) { return d.state; }
                        });
+      /* Things to display: state, start, duration*/
+      state_blocks.on("mouseover", function(d) {
+                                  var tasks_performed = lookup_table["tasks_performed"][d.state];
+                                  return tooltip.style("visibility", "visible")
+                                                .html("<table>" +
+                                                      "<tr><th colspan='2'>Task Table</th></tr>" +
+                                                      "<tr><td> ENV-NAND </td><td> ENV-NOT </td></tr>" +
+                                                      "<tr><td>"+ tasks_performed["ENV-NAND"] +"</td><td>"+ tasks_performed["ENV-NOT"] + "</td></tr>" +
+                                                      "</table>" + "<br/>Start update: " + d.true_start  + "<br/>Duration: " + d.true_duration);
+                                })
+                .on("mousemove", function() { return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px"); })
+                .on("mouseout", function() { return tooltip.style("visibility", "hidden"); });
     });
   }
 
