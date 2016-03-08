@@ -5838,8 +5838,8 @@ body {
     border-color: #0077B8; }
     .panel-lalejini .panel-heading a {
       text-decoration: none; }
-  .panel-lalejini .btn {
-    padding: 5px; }
+  .panel-lalejini .text-box {
+    padding-top: 10px; }
 
 #lineage_vis_legend {
   background-color: white; }

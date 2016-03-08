@@ -42,10 +42,18 @@
                   <div class="panel-body">
                     <h3>Overview</h3>
                     <p>
-                    To explore evolutionary strategies evolved in fluctuating environments, we visualized the lineages of evolved genotypes as vertical bars where time (in updates) proceeds from top to bottom beginning with lineage's original ancestor genotype. Any given genotype on the lineage must express one of the sixteen possible phenotypes enumerated to the right in the Legend. At each point in time, the color of the visualized lineage corresponds to the color representing the phenotype expressed by the lineage at that point in time. For example, because the ancestral organism is capable only of self-replication, all visualized lineages should show that the original ancestor's phenotype performed neither the NAND task nor the NOT task. In addition to the visualized lineages, we indicate the actual environmental conditions experienced by the evolving populations at each point in time by the color of the vertical axis. This type of visualization allows us to display the phenotypic states traversed by any given lineage, which allowed us to explore evolutionary strategies leveraged by all evolved lineages.
+                    Lineages of evolved genotypes are visualized as vertical bars where time (in updates) proceeds from top to bottom beginning with lineage's original ancestor genotype.
                     </p>
                     <h3>Phenotypic State Indication</h3>
+                    Any given genotype on the lineage must express one of the sixteen possible phenotypes enumerated to the right in the Legend. At each point in time, the color of the visualized lineage corresponds to the color representing the phenotype expressed by the lineage at that point in time. Hover your mouse over a phenotypic state in the visualization to see detail.
                     <h3>Environment Indication</h3>
+                     The actual environmental conditions experienced by the evolving populations at each point in time are indicated by the color of the vertical axis. Hover your mouse over the environment axis to view details about the environment.
+                     <h3>Definitions</h3>
+                     <ul>
+                       <li><b>ENV-NAND</b> - the NAND computational task is rewarded and the NOT task is punished</li>
+                       <li><b>ENV-NOT</b> - the NOT computational task is rewarded and the NAND task is punished</li>
+                       <li><b>CONTROL-ENV</b> - both the NAND and the NOT computational tasks are rewarded</li>
+                     </ul>
                   </div>
                 </div>
               </div>
@@ -66,6 +74,9 @@
               <div class="panel-body" id="legend-panel-body">
                 <div class ="img-default" id="lineage_vis_legend">
                   <img src="imgs/task-profiles.png" alt="Legend" class="img-responsive"></img>
+                </div>
+                <div class="text-box">
+                  <p>Enumeration of all possible phenotypic states. Each row represents a distinct phenotype. A green 'X' indicates that the associated task is performed in the specified environment, while a red '--' indicates that the task is not performed. For each environment, the column of the rewarded task is highlighted in green, and the column of the punished task is highlighted in red. A green 'X' in a green column or a red '--' in a red column is optimal. Each phenotype has a color code, which is used the visualization below. Note that the first four rows are non-plastic phenotypes, rows 5-8 exhibit partially beneficial plasticity, and row 9 is optimally beneficial. Rows 10-11 are mostly neutral, while rows 12-16 are detrimental forms of plasticity.</p>
                 </div>
               </div>
             </div>
