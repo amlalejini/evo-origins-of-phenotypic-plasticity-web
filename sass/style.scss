@@ -59,7 +59,7 @@ body {
 
 }
 
-.navbar-default .navbar-nav > li > a, .navbar-lalejini .navbar-nav > li > a {
+.navbar-lalejini .navbar-nav > li > a {
   color: $secondary-color;
   &:hover {
     color: darken($secondary-color, 10);
@@ -91,16 +91,8 @@ body {
     }
   }
 
-  dl {
-    dt {
-      color: lighten($secondary-color, 10);
-      a {
-        color: lighten($secondary-color, 10);
-      }
-    }
-    dd {
-      color: darken($primary-text-color, 20);
-    }
+  .btn {
+      padding: 5px;
   }
 
 }
@@ -109,17 +101,15 @@ body {
   background-color: $canvas-color;
 }
 
-
-
 h2 {
   color: $secondary-color;
 }
 
-
-
 //////////////////////////////////////////////////////////////
 // Visualization
 //////////////////////////////////////////////////////////////
+
+
 .t-tip {
   background-color: $primary-color;
   color: $primary-text-color;
@@ -153,20 +143,14 @@ h2 {
 .lineage_filter_options {
   float: none;
   margin: 0 auto;
+  padding-top: 5px;
+  input {
+    margin: 0 10px 0 10px;
+  }
 }
 
 #chart_area {
   background-color: $canvas-color;
-}
-
-.nandpnotm_points {
-  fill: red;
-  fill-opacity: 0.2;
-}
-
-.nandmnotp_points {
-  fill: blue;
-  fill-opacity: 0.2;
 }
 
 

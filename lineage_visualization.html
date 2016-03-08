@@ -40,9 +40,12 @@
                 </div>
                 <div id="collapseAbout" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="about-heading">
                   <div class="panel-body">
+                    <h3>Overview</h3>
                     <p>
                     To explore evolutionary strategies evolved in fluctuating environments, we visualized the lineages of evolved genotypes as vertical bars where time (in updates) proceeds from top to bottom beginning with lineage's original ancestor genotype. Any given genotype on the lineage must express one of the sixteen possible phenotypes enumerated to the right in the Legend. At each point in time, the color of the visualized lineage corresponds to the color representing the phenotype expressed by the lineage at that point in time. For example, because the ancestral organism is capable only of self-replication, all visualized lineages should show that the original ancestor's phenotype performed neither the NAND task nor the NOT task. In addition to the visualized lineages, we indicate the actual environmental conditions experienced by the evolving populations at each point in time by the color of the vertical axis. This type of visualization allows us to display the phenotypic states traversed by any given lineage, which allowed us to explore evolutionary strategies leveraged by all evolved lineages.
                     </p>
+                    <h3>Phenotypic State Indication</h3>
+                    <h3>Environment Indication</h3>
                   </div>
                 </div>
               </div>
@@ -55,7 +58,7 @@
             <div class="panel-heading" role="tab" id="legend-heading">
               <h2>
                 <a class="collapsed" role="button" data-toggle="collapse" href="#collapseLegend" aria-expanded="false" aria-controls="collapseLegend">
-                   Legend
+                   Phenotypic State Legend
                 </a>
               </h2>
             </div>
@@ -78,10 +81,10 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-8">
                   <!-- Treatment selection -->
                   <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="treatment_selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <button class="btn btn-block btn-default dropdown-toggle" type="button" id="treatment_selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                       NONE
                       <span class="caret"></span>
                     </button>
@@ -93,14 +96,6 @@
                       <li><a value="io-sense-mut" href="#">Low Mutation Rate</a></li>
                       <li><a value="io-sense-mut-high" href="#">High Mutation Rate</a></li>
                     </ul>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <!-- Lineage filtering options -->
-                  <div class="lineage_filter_options">
-                    <input class="lineage_type_filter" id="plastic_cb" type="radio" name="display" value="plastic">Plastic Only</input>
-                    <input class="lineage_type_filter" id="nonplastic_cb" type="radio" name="display" value="nonplastic" >Non-plastic Only</input>
-                    <input class="lineage_type_filter" id="all_cb" type="radio" name="display" value="all" checked> All </input>
                   </div>
                 </div>
                 <div class="col-md-2">
@@ -120,6 +115,18 @@
                     <input type="checkbox" data-toggle="toggle" data-on="Full" data-off="Sliced" id="slice_toggle">
                   </div>
                 </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- Lineage filtering options -->
+                  <div class="lineage_filter_options">
+                    <input class="lineage_type_filter" id="plastic_cb" type="radio" name="display" value="plastic">Plastic Only</input>
+                    <input class="lineage_type_filter" id="nonplastic_cb" type="radio" name="display" value="nonplastic" >Non-plastic Only</input>
+                    <input class="lineage_type_filter" id="all_cb" type="radio" name="display" value="all" checked> All </input>
+                  </div>
+                </div>
+
+
               </div>
             </div> <!-- end panel body -->
           </div> <!-- end  pangel -->

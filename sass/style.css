@@ -5817,9 +5817,9 @@ body {
   background-color: #262626;
   border: none; }
 
-.navbar-default .navbar-nav > li > a, .navbar-lalejini .navbar-nav > li > a, .navbar-lalejini .navbar-nav > li > a {
+.navbar-lalejini .navbar-nav > li > a {
   color: #0077B8; }
-  .navbar-default .navbar-nav > li > a:hover, .navbar-lalejini .navbar-nav > li > a:hover, .navbar-lalejini .navbar-nav > li > a:hover {
+  .navbar-lalejini .navbar-nav > li > a:hover {
     color: #005685; }
 
 .navbar-nav.nav-justified > li {
@@ -5838,12 +5838,8 @@ body {
     border-color: #0077B8; }
     .panel-lalejini .panel-heading a {
       text-decoration: none; }
-  .panel-lalejini dl dt {
-    color: #0098eb; }
-    .panel-lalejini dl dt a {
-      color: #0098eb; }
-  .panel-lalejini dl dd {
-    color: #a6a6a6; }
+  .panel-lalejini .btn {
+    padding: 5px; }
 
 #lineage_vis_legend {
   background-color: white; }
@@ -5874,18 +5870,13 @@ h2 {
 
 .lineage_filter_options {
   float: none;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding-top: 5px; }
+  .lineage_filter_options input {
+    margin: 0 10px 0 10px; }
 
 #chart_area {
   background-color: white; }
-
-.nandpnotm_points {
-  fill: red;
-  fill-opacity: 0.2; }
-
-.nandmnotp_points {
-  fill: blue;
-  fill-opacity: 0.2; }
 
 .axis path, .x_axis path, .y_axis path {
   fill: none;
