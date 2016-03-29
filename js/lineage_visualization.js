@@ -281,7 +281,7 @@ var data_callback = function(data) {
     env_blocks.exit().remove();
     env_blocks.attr({"y": function(d) { var si = get_range_id(d); return yScales[si](d.start); },
                                                     "x": function(d) { return xScale(0); },
-                                                    "width": function(d) { return 5; },
+                                                    "width": function(d) { return 7; },
                                                     "height": function(d) { var si = get_range_id(d); return yScales[si](display_ranges[si][0] + d.duration) - yScales[si](display_ranges[si][0]); },
                                                     "class": function(d) { return d.environment; },
                                                 });
