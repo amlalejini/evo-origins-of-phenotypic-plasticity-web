@@ -26,7 +26,7 @@ var canvas_height = frame_height - margin.top - margin.bottom;
 // Some constants:
 var x_domain = null;    // Range of values x can take on
 var y_domain = null;            // Range of values y can take on
-var spacer_length = 20;
+var spacer_length = 30;
 
 var tooltip = d3.select("body")
                         .append("div")
@@ -281,7 +281,7 @@ var data_callback = function(data) {
     env_blocks.exit().remove();
     env_blocks.attr({"y": function(d) { var si = get_range_id(d); return yScales[si](d.start); },
                                                     "x": function(d) { return xScale(0); },
-                                                    "width": function(d) { return 7; },
+                                                    "width": function(d) { return 10; },
                                                     "height": function(d) { var si = get_range_id(d); return yScales[si](display_ranges[si][0] + d.duration) - yScales[si](display_ranges[si][0]); },
                                                     "class": function(d) { return d.environment; },
                                                 });
@@ -310,7 +310,7 @@ var data_callback = function(data) {
       state_blocks.attr({"y": function(d) { var si = get_range_id(d); return yScales[si](d.start); },
                          "x": function(d) { return xScale(1.25 * i + 3); },
                          "height": function(d) { var si = get_range_id(d); return yScales[si](display_ranges[si][0] + d.duration) - yScales[si](display_ranges[si][0]); },
-                         "width": function(d) { return xScale(0.95); },
+                         "width": function(d) { return xScale(0.98); },
                          "class": function(d) { return d.state; }
                        });
       /* Things to display: state, start, duration*/
