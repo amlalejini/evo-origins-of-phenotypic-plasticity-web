@@ -13,16 +13,16 @@ $canvas-color: lighten($primary-color, 85);
 $C0000-color: lighten(black, 30);
 // $C0101-color: darken(cyan, 10);
 // $C1010-color: lighten(blue, 10);
-$C0101-color: cyan;
-$C1010-color: blue;
+$C0101-color: saturate(cyan, 100);
+$C1010-color: saturate(darken(blue, 10), 100);
 $C1111-color: white;
 
-$C0001-color: #f7fcb9;
-$C1000-color: #a8daa4;
-$C1011-color: #238443;
-$C1101-color: #41ab5d;
+$C0001-color: saturate(lighten(#5A2668, 5), 100);
+$C1000-color: saturate(lighten(#734CB9, 20), 100);
+$C1011-color: saturate(#D793EA, 100);
+$C1101-color: saturate(darken(mix(#928ADD, violet, 20), 15), 100);
 
-$C1001-color: lighten(gold, 5);
+$C1001-color: saturate(lighten(green, 25), 100);
 
 $C0010-color: #ff6854;
 $C0100-color: #ff6854;

@@ -26,7 +26,7 @@ var lineage_vis_settings =
   },
   "io-sense-cycle-200": {
     "hr_name": "Long Environment Cycle Length Treatment",
-    "sliced_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "sliced_ranges": [[0, 500], [47500, 52500], [95000, 100000]],
     "full_ranges": [[0, 100000]],
     "environment_cycle_length": 200,
     "maximum_update": 100000,
@@ -56,7 +56,7 @@ var lineage_vis_settings =
   },
   "io-sense-only": {
     "hr_name": "Baseline Treatment",
-    "sliced_ranges": [[0, 1000], [47500, 52500], [95000, 100000]],
+    "sliced_ranges": [[0, 500], [47500, 52500], [95000, 100000]],
     "full_ranges": [[0, 100000]],
     "environment_cycle_length": 100,
     "maximum_update": 100000,

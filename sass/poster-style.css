@@ -5887,11 +5887,11 @@ h2 {
   font-size: 11px; }
 
 .env_canvas .nandpnotm {
-  fill: #1a1aff; }
+  fill: #0000e6; }
 .env_canvas .nandmnotp {
   fill: #1affff; }
 .env_canvas .nandpnotp {
-  fill: #0080ff; }
+  fill: #0080e6; }
 
 .line, .nandpnotm_line, .nandmnotp_line {
   fill: none;
@@ -5910,7 +5910,7 @@ h2 {
   fill: #4d4d4d; }
 
 .C0001 {
-  fill: #f7fcb9; }
+  fill: #8400a8; }
 
 .C0010 {
   fill: #ff6854; }
@@ -5931,22 +5931,22 @@ h2 {
   fill: #ff6854; }
 
 .C1000 {
-  fill: #a8daa4; }
+  fill: #a16cff; }
 
 .C1001 {
-  fill: #ffdb1a; }
+  fill: #01ff01; }
 
 .C1010 {
-  fill: blue; }
+  fill: #0000cc; }
 
 .C1011 {
-  fill: #238443; }
+  fill: #e37eff; }
 
 .C1100 {
   fill: #cdcdcd; }
 
 .C1101 {
-  fill: #41ab5d; }
+  fill: #df24ff; }
 
 .C1110 {
   fill: #ff6854; }
@@ -5957,7 +5957,7 @@ h2 {
 .table .C0000 {
   background-color: #4d4d4d; }
 .table .C0001 {
-  background-color: #f7fcb9; }
+  background-color: #8400a8; }
 .table .C0010 {
   background-color: #ff6854; }
 .table .C0011 {
@@ -5971,17 +5971,17 @@ h2 {
 .table .C0111 {
   background-color: #ff6854; }
 .table .C1000 {
-  background-color: #a8daa4; }
+  background-color: #a16cff; }
 .table .C1001 {
-  background-color: #ffdb1a; }
+  background-color: #01ff01; }
 .table .C1010 {
-  background-color: blue; }
+  background-color: #0000cc; }
 .table .C1011 {
-  background-color: #238443; }
+  background-color: #e37eff; }
 .table .C1100 {
   background-color: #cdcdcd; }
 .table .C1101 {
-  background-color: #41ab5d; }
+  background-color: #df24ff; }
 .table .C1110 {
   background-color: #ff6854; }
 .table .C1111 {
