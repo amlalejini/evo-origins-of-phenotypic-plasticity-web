@@ -7,19 +7,19 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="sass/style.css"/>
+    <link rel="stylesheet" type="text/css" href="sass/lineage_visualization_style.css"/>
   </head>
 
   <body>
     <div class = "container">
       <!-- Project Nav -->
-      <nav class="navbar navbar-lalejini">
+      <!-- <nav class="navbar navbar-lalejini">
         <div class="container-fluid">
           <ul class = "nav navbar-nav nav-justified">
             <li><a href="http://lalejini.com/experience.html" class="btn-lg " id="active_page">Back to Projects</a></li>
           </ul>
         </div>
-      </nav>
+      </nav> -->
       <!-- Heading -->
       <div id="banner" class = "jumbotron">
         <h1>Visualization: The Evolutionary Origins of Phenotypic Plasticity</h1>
@@ -53,6 +53,8 @@
                        <li><b>ENV-NOT</b> - the NOT computational task is rewarded and the NAND task is punished</li>
                        <li><b>CONTROL-ENV</b> - both the NAND and the NOT computational tasks are rewarded</li>
                      </ul>
+                     <h3>Source</h3>
+                     The source code for this visualization can be found: <a href="https://github.com/amlalejini/evo-origins-of-phenoytpic-plasticity-web">https://github.com/amlalejini/evo-origins-of-phenoytpic-plasticity-web</a>
                   </div>
                 </div>
               </div>
@@ -72,7 +74,7 @@
             <div id="collapseLegend" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="legend-heading">
               <div class="panel-body" id="legend-panel-body">
                 <div class ="img-default" id="lineage_vis_legend">
-                  <img src="imgs/task-profiles.png" alt="Legend" class="img-responsive"></img>
+                  <img src="imgs/RECOLOR-task-profiles.png" alt="Legend" class="img-responsive"></img>
                 </div>
                 <div class="text-box">
                   <p>Enumeration of all possible phenotypic states. Each row represents a distinct phenotype. A green 'X' indicates that the associated task is performed in the specified environment, while a red '--' indicates that the task is not performed. For each environment, the column of the rewarded task is highlighted in green, and the column of the punished task is highlighted in red. A green 'X' in a green column or a red '--' in a red column is optimal. Each phenotype has a color code, which is used the visualization below. Note that the first four rows are non-plastic phenotypes, rows 5-8 exhibit partially beneficial plasticity, and row 9 is optimally beneficial. Rows 10-11 are mostly neutral, while rows 12-16 are detrimental forms of plasticity.</p>

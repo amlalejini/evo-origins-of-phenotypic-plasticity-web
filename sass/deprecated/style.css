@@ -5856,11 +5856,11 @@ h2 {
     text-align: center;
     padding: 3px; }
 
-.state_block, .env_block, .env_canvas .nandpnotm, .env_canvas .nandmnotp, .env_canvas .nandpnotp, .C0000, .C0001, .C0010, .C0011, .C0100, .C0101, .C0110, .C0111, .C1000, .C1001, .C1010, .C1011, .C1100, .C1101, .C1110, .C1111, .table .C0000, .table .C0001, .table .C0010, .table .C0011, .table .C0100, .table .C0101, .table .C0110, .table .C0111, .table .C1000, .table .C1001, .table .C1010, .table .C1011, .table .C1100, .table .C1101, .table .C1110, .table .C1111 {
+.state_block, .env_block, .env_canvas .nandpnotm, .env_canvas .nandmnotp, .env_canvas .nandpnotp, .data_canvas .C0000, .data_canvas .C0001, .data_canvas .C0010, .data_canvas .C0011, .data_canvas .C0100, .data_canvas .C0101, .data_canvas .C0110, .data_canvas .C0111, .data_canvas .C1000, .data_canvas .C1001, .data_canvas .C1010, .data_canvas .C1011, .data_canvas .C1100, .data_canvas .C1101, .data_canvas .C1110, .data_canvas .C1111, .table .C0000, .table .C0001, .table .C0010, .table .C0011, .table .C0100, .table .C0101, .table .C0110, .table .C0111, .table .C1000, .table .C1001, .table .C1010, .table .C1011, .table .C1100, .table .C1101, .table .C1110, .table .C1111 {
   position: relative;
   z-index: 1;
   stroke: black; }
-  .state_block:hover, .env_block:hover, .env_canvas .nandpnotm:hover, .env_canvas .nandmnotp:hover, .env_canvas .nandpnotp:hover, .C0000:hover, .C0001:hover, .C0010:hover, .C0011:hover, .C0100:hover, .C0101:hover, .C0110:hover, .C0111:hover, .C1000:hover, .C1001:hover, .C1010:hover, .C1011:hover, .C1100:hover, .C1101:hover, .C1110:hover, .C1111:hover {
+  .state_block:hover, .env_block:hover, .env_canvas .nandpnotm:hover, .env_canvas .nandmnotp:hover, .env_canvas .nandpnotp:hover, .data_canvas .C0000:hover, .data_canvas .C0001:hover, .data_canvas .C0010:hover, .data_canvas .C0011:hover, .data_canvas .C0100:hover, .data_canvas .C0101:hover, .data_canvas .C0110:hover, .data_canvas .C0111:hover, .data_canvas .C1000:hover, .data_canvas .C1001:hover, .data_canvas .C1010:hover, .data_canvas .C1011:hover, .data_canvas .C1100:hover, .data_canvas .C1101:hover, .data_canvas .C1110:hover, .data_canvas .C1111:hover, .table .C0000:hover, .table .C0001:hover, .table .C0010:hover, .table .C0011:hover, .table .C0100:hover, .table .C0101:hover, .table .C0110:hover, .table .C0111:hover, .table .C1000:hover, .table .C1001:hover, .table .C1010:hover, .table .C1011:hover, .table .C1100:hover, .table .C1101:hover, .table .C1110:hover, .table .C1111:hover {
     stroke-width: 3px;
     z-index: 100; }
 
@@ -5884,107 +5884,89 @@ h2 {
   shape-rendering: crispEdges; }
 .axis text, .x_axis text, .y_axis text {
   font-family: sans-serif;
-  font-size: 18px; }
+  font-size: 11px; }
 
 .env_canvas .nandpnotm {
-  fill: #0000e6; }
+  fill: #4d4dff; }
 .env_canvas .nandmnotp {
-  fill: #1affff; }
+  fill: #00e6e6; }
 .env_canvas .nandpnotp {
-  fill: #0080e6; }
+  fill: #1a80e6; }
 
-.line, .nandpnotm_line, .nandmnotp_line {
+.data_canvas .line, .data_canvas .nandpnotm_line, .data_canvas .nandmnotp_line {
   fill: none;
   stroke: black;
   shape-rendering: crispEdges; }
-
-.nandpnotm_line {
+.data_canvas .nandpnotm_line {
   stroke: red;
   opacity: 0.5; }
-
-.nandmnotp_line {
+.data_canvas .nandmnotp_line {
   stroke: blue;
   opacity: 0.5; }
-
-.C0000 {
+.data_canvas .C0000 {
   fill: #4d4d4d; }
-
-.C0001 {
-  fill: #8400a8; }
-
-.C0010 {
-  fill: #ff6854; }
-
-.C0011 {
+.data_canvas .C0001 {
+  fill: #ff4d4d; }
+.data_canvas .C0010 {
+  fill: #009a00; }
+.data_canvas .C0011 {
   fill: #cdcdcd; }
-
-.C0100 {
-  fill: #ff6854; }
-
-.C0101 {
-  fill: cyan; }
-
-.C0110 {
-  fill: #cc0000; }
-
-.C0111 {
-  fill: #ff6854; }
-
-.C1000 {
-  fill: #a16cff; }
-
-.C1001 {
-  fill: #01ff01; }
-
-.C1010 {
-  fill: #0000cc; }
-
-.C1011 {
-  fill: #e37eff; }
-
-.C1100 {
+.data_canvas .C0100 {
+  fill: #009a00; }
+.data_canvas .C0101 {
+  fill: #00cccc; }
+.data_canvas .C0110 {
+  fill: #009a00; }
+.data_canvas .C0111 {
+  fill: #009a00; }
+.data_canvas .C1000 {
+  fill: #990000; }
+.data_canvas .C1001 {
+  fill: #ffdb1a; }
+.data_canvas .C1010 {
+  fill: #3333ff; }
+.data_canvas .C1011 {
+  fill: #b300b3; }
+.data_canvas .C1100 {
   fill: #cdcdcd; }
-
-.C1101 {
-  fill: #df24ff; }
-
-.C1110 {
-  fill: #ff6854; }
-
-.C1111 {
+.data_canvas .C1101 {
+  fill: #ff9dab; }
+.data_canvas .C1110 {
+  fill: #009a00; }
+.data_canvas .C1111 {
   fill: white; }
 
 .table .C0000 {
   background-color: #4d4d4d; }
 .table .C0001 {
-  background-color: #8400a8; }
+  background-color: #ff4d4d; }
 .table .C0010 {
-  background-color: #ff6854; }
+  background-color: #009a00; }
 .table .C0011 {
   background-color: #cdcdcd; }
 .table .C0100 {
-  background-color: #ff6854; }
+  background-color: #009a00; }
 .table .C0101 {
-  background-color: cyan; }
+  background-color: #00cccc; }
 .table .C0110 {
-  background-color: #cc0000; }
+  background-color: #009a00; }
 .table .C0111 {
-  background-color: #ff6854; }
+  background-color: #009a00; }
 .table .C1000 {
-  background-color: #a16cff; }
+  background-color: #990000; }
 .table .C1001 {
-  background-color: #01ff01; }
+  background-color: #ffdb1a; }
 .table .C1010 {
-  background-color: #0000cc; }
+  background-color: #3333ff; }
 .table .C1011 {
-  background-color: #e37eff; }
+  background-color: #b300b3; }
 .table .C1100 {
   background-color: #cdcdcd; }
 .table .C1101 {
-  background-color: #df24ff; }
+  background-color: #ff9dab; }
 .table .C1110 {
-  background-color: #ff6854; }
+  background-color: #009a00; }
 .table .C1111 {
   background-color: white; }
 
-/*# sourceMappingURL=poster-style.css.map */
+/*# sourceMappingURL=style.css.map */
