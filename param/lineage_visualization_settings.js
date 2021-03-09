@@ -10,7 +10,7 @@ var lineage_vis_settings =
     "environment_cycle_length": 100000,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotp"],
-    "update_label_interval": 500,
+    "update_label_interval": 1000,
     "max_reps": 50
   },
   "io-sense-cycle-50": {
@@ -20,7 +20,7 @@ var lineage_vis_settings =
     "environment_cycle_length": 50,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotm", "nandmnotp"],
-    "update_label_interval": 500,
+    "update_label_interval": 1000,
     "max_reps": 50
 
   },
@@ -31,7 +31,7 @@ var lineage_vis_settings =
     "environment_cycle_length": 200,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotm", "nandmnotp"],
-    "update_label_interval": 500,
+    "update_label_interval": 1000,
     "max_reps": 50
   },
   "io-sense-mut": {
@@ -41,7 +41,7 @@ var lineage_vis_settings =
     "environment_cycle_length": 100,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotm", "nandmnotp"],
-    "update_label_interval": 500,
+    "update_label_interval": 1000,
     "max_reps": 50
   },
   "io-sense-mut-high": {
@@ -51,7 +51,7 @@ var lineage_vis_settings =
     "environment_cycle_length": 100,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotm", "nandmnotp"],
-    "update_label_interval": 500,
+    "update_label_interval": 1000,
     "max_reps": 50
   },
   "io-sense-only": {
@@ -61,7 +61,7 @@ var lineage_vis_settings =
     "environment_cycle_length": 100,
     "maximum_update": 100000,
     "environment_codes": ["nandpnotm", "nandmnotp"],
-    "update_label_interval": 500,
+    "update_label_interval": 1000,
     "max_reps": 50
   }
 };

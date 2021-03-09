@@ -10,28 +10,34 @@ $primary-text-color: lighten($primary-color, 65);
 
 $canvas-color: lighten($primary-color, 85);
 
+$plastic-adaptive: #CAB2D6;
+$plastic-optimal: #6A3D9A;
+
+$plastic-maladaptive: #FDBF6F;
+$plastic-maladaptive-worst: #FF7F00;
+
+$plastic-neutral: lighten(grey, 30);
+
 $C0000-color: lighten(black, 30);
 $C0101-color: saturate(cyan, 100);
 $C1010-color: saturate(darken(blue, 10), 100);
 $C1111-color: white;
 
-$C0001-color: saturate(lighten(#5A2668, 5), 100);
-$C1000-color: saturate(lighten(#734CB9, 20), 100);
-$C1011-color: saturate(#D793EA, 100);
-$C1101-color: saturate(darken(mix(#928ADD, violet, 20), 15), 100);
+$C0001-color: $plastic-adaptive;
+$C1000-color: $plastic-adaptive;
+$C1011-color: $plastic-adaptive;
+$C1101-color: $plastic-adaptive;
 
-$C1001-color: saturate(lighten(green, 25), 100);
+$C1001-color: $plastic-optimal;
 
-$C0010-color: #ff6854;
-$C0100-color: #ff6854;
-$C0111-color: #ff6854;
-$C1110-color: #ff6854;
+$C0010-color: $plastic-maladaptive;
+$C0100-color: $plastic-maladaptive;
+$C0111-color: $plastic-maladaptive;
+$C1110-color: $plastic-maladaptive;
+$C0110-color: $plastic-maladaptive-worst;
 
-$C0110-color: darken(red, 10);
-
-
-$C1100-color: lighten(grey, 30);
-$C0011-color: lighten(grey, 30);
+$C1100-color: $plastic-neutral;
+$C0011-color: $plastic-neutral;
 
 //////////////////////////////////////////////////////////////
 // Project Site -- General
